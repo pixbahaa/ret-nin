@@ -1,0 +1,12 @@
+#/bin/bash
+
+sudo dpkg --add-architecture i386
+sudo mkdir -pm755 /etc/apt/keyrings
+wget -O - https://dl.winehq.org/wine-builds/winehq.key | sudo gpg --dearmor -o /etc/apt/keyrings/winehq-archive.key -
+sudo wget -NP /etc/apt/sources.list.d/ https://dl.winehq.org/wine-builds/debian/dists/bookworm/winehq-bookworm.sources
+sudo apt update
+sudo apt install --install-recommends winehq-stable -y
+cd /tmp
+curl -O https://buildbot.libretro.com/stable/1.21.0/windows/x86_64/RetroArch-Win64-setup.exe
+cd
+wine /tmp/RetroArch-Win64-setup.exe
